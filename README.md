@@ -38,8 +38,7 @@ Finally, we built a GUI window to work as an interface between the tool and the 
  
   in compile we handle the error and return the exception in text file 
 
- - ![This is an image](project4/exception.png)
- 
+   ![This is an image](project4/exception.png)
  
  
  - **Execute Button** that executes the Python code.
