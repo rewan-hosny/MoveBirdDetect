@@ -18,7 +18,6 @@ def compile():
     except Exception as e:
        print("Exceution error ",e)
 
-
 def execute():
     try:
         current_time = datetime.now().strftime("%H:%M:%S")
