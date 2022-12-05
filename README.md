@@ -35,8 +35,7 @@ Finally, we built a GUI window to work as an interface between the tool and the 
  - **Output text box** for the generated Python code.
  - **Results table** for showing the results if any.
  - **Compile Button** that compiles the commands you gave to Python.
- - ** in compile we handle the error and return the exception in text file 
-
+ in compile we handle the error and return the exception in text file 
 
  - ![This is an image](project4/exception.png)
  
