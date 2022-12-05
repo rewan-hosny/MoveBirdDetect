@@ -1,6 +1,7 @@
 
 from app.etl.DataSources.IDataSource import IDataSource
-from app.etl import bird
+from app.etl.Move_Bird import bird
+
 
 class Media(IDataSource):
     def __init__(self, type) -> None:
