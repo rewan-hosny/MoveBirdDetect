@@ -13,7 +13,7 @@ def compile():
         query = str(ui.inputbox.text())
         query = query.lower()
         result = parser.parse(query)
-        # print(result)
+        print(result)
         ui.outputbox.setText(str(result))
     except Exception as e:
        print("Exceution error ",e)
