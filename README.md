@@ -5,7 +5,7 @@
 * or media like (MP4,MP3)
 * or DataBase like (mssql,sqlite)
 
-![This is an image](Downloads/ETL-Compiler-main/ETL-Compiler-main/project4/DataSource.png)
+![This is an image](project4/DataSource.png)
 
 #### secondly, after determine type that we can use function extract,load:
 
