@@ -5,6 +5,8 @@ from datetime import datetime
 import time
 from tabulate import tabulate
 import traceback
+import logging
+execution_logger = logging.getLogger('Execution')
 
 
 
@@ -46,7 +48,4 @@ def execute():
                 ui.results.toPlainText() + f"\n{table}\n"
             )
     except Exception as e:
-        print("excution error :",e)
-        with open('excution_error_log.txt', 'a+') as f:
-            currentdate = time.strftime('%Y-%m-%d|%H:%M:%S')
-            f.write(currentdate + ',' + traceback.format_exc() + '\n')
+        execution_logger.error (e, exc_info=True)
