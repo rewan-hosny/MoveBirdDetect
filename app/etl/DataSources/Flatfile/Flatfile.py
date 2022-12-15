@@ -2,7 +2,7 @@ from app.etl.DataSources.IDataSource import IDataSource
 from app.etl.DataSources.Flatfile.FlatfileTypes import EFlatfile
 import pandas as pd
 
-
+# Eflatfile.HTML
 class Flatfile(IDataSource):
     def __init__(self, type: EFlatfile) -> None:
         super().__init__(type)

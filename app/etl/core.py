@@ -9,14 +9,10 @@ result = None
 
 def extract(data_source: str) -> pd.DataFrame:
     file_path = data_source.split('::')[1]
-    print("res")
     data_source= DataSourceFactory().determineType(data_source)
-    print("file_path")
     data = data_source.extract(file_path)
     print(data)
-
     return data
-
 
 def load(data: pd.DataFrame, data_destination: str):
     global result
