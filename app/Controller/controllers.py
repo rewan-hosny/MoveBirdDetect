@@ -48,4 +48,5 @@ def execute():
                 ui.results.toPlainText() + f"\n{table}\n"
             )
     except Exception as e:
+
         execution_logger.error (e, exc_info=True)
