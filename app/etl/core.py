@@ -9,7 +9,7 @@ result = None
 
 def extract(data_source: str) -> pd.DataFrame:
     file_path = data_source.split('::')[1]
-    data_source= DataSourceFactory().determineType(data_source)
+    data_source= DataSourceFactory().factory(data_source)
     data = data_source.extract(file_path)
     print(data)
     return data
@@ -18,7 +18,7 @@ def load(data: pd.DataFrame, data_destination: str):
     global result
 
     file_path = data_destination.split('::')[1]
-    data_destination= DataSourceFactory().determineType(data_destination)
+    data_destination= DataSourceFactory().factory(data_destination)
     print(data_destination)
     result = data_destination.load(data, file_path)
     if result is None:

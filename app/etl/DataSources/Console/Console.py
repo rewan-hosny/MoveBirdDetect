@@ -4,7 +4,7 @@ class Console(IDataSource):
     def __init__(self, type) -> None:
         super().__init__(type)
 
-    def extract():
+    def extract(self):
         raise NotImplementedError('Extract method not implemented for console')
 
     def load(self, data, file_path):

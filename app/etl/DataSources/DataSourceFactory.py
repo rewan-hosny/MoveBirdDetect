@@ -12,7 +12,7 @@ from app.etl.DataSources.Console.EConsole import EConsoleTypes
 
 class DataSourceFactory():
 
-    def determineType(cls, data_source):
+    def factory(cls, data_source):
         T = data_source.split(':')[0]
         if (T == 'mssql'):
             return  Database(DatabaseType.MSSQL, data_source)
@@ -30,11 +30,14 @@ class DataSourceFactory():
             return Flatfile(EFlatfile.EXCEL)
         elif (T == 'video'):
             return Media(EMedia.VIDEO)
+        elif (T == 'folder'):
+            return Media (EMedia.Folder)
         elif (T == 'img'):
             return  Media(EMedia.IMAGE)
         elif (T == 'stdout'):
             return Console(EConsoleTypes.STDOUT)
         elif(T == 'custom'):
             return Console(EConsoleTypes.CUSTOM)
+
         else:
             raise ValueError(T + " is not supported datasource type")

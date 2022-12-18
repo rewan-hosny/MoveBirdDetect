@@ -16,13 +16,7 @@ class ClsMotion (object):
             # fill file name without time for all frames
             frame_time = float (frame_second[0])
             dict_frame_time[frame_time] = os.path.splitext (fileName)[0].replace (frame_second[0], '')
-            '''x = (fileName.split(".", 1)[1])
-        statusOfHeads.append(x.split('_', 1)[0])
-        res = list(map(int, frame_second))
-        seconds.append(res)
-        '''
-        # self.get_pose(dict_frame_time)
-        # self.get_motion_per_time(dict_frame_time)
+
         return self.get_motion_per_time (dict_frame_time)
 
     def get_motion_per_time(self, dict_frame_time):
@@ -85,29 +79,11 @@ for key in set(dictionary) - set([1, 2, 3]):
                             # obj = ((dict_pose_startTime[birdPart], delta), birdPart)
                             result[cur_time][birdPart] = (dict_pose_startTime[birdPart], delta)
 
-                            # print(obj)
-                            # changes_arr.append(obj)
 
-                    # if(shrf>0):
-                    #     if(result[cur_time]!={}):
-                    #         print('5555555555555555555555555555')
-                    #         print(cur_time)
-                    #         print(result[cur_time])
-                    #         print('55555555555555555555555555555')
-                    #         shrf=shrf-1
-
-        # print(result[1])
         return result
 
     def get_difference(self, first_dict, second_dict):
-        '''
-        i.e. [{head:right , leg:up, tail:left , wing:on }]
-        i.e. [{head:left , leg:down, tail:left , wing:on }]
-        result will be   [{head:left , leg:down}]
-        :param first_dict:
-        :param second_dict:
-        :return: dict of the differences like [{head:left , leg:down}]
-        '''
+
         try:
             first_dict = set (first_dict.items ())
             second_dict = set (second_dict.items ())
@@ -115,26 +91,9 @@ for key in set(dictionary) - set([1, 2, 3]):
         except:
             pass
 
-    # def json_evaluate(self, json_file):
-    #     #evaluated_json_file = json.loads(json_file)
-    #     with open(json_file, 'r') as f:
-    #         json_text = f.read()
-    #
-    #     # Decode the JSON string into a Python dictionary.
-    #     esra_dict = json.loads(json_text)
-    #
+
 
     def get_pose(self, file_name):
-        '''
-        a dict for each bird in the frame
-        if a frame contain one bird then the list contain one dict
-        i.e. [{head:right , leg:up, tail:left , wing:on }]
-        Parameters:
-        fileName_withoutTime_withoutExt: fileName withoutTime withoutExt
-        Returns:
-        listOfDict : return List of Dict
-        '''
-
         head = 0
         leg = 1
         wing = 2

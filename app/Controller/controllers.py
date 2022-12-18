@@ -9,7 +9,6 @@ import logging
 execution_logger = logging.getLogger('Execution')
 
 
-
 def compile():
     try:
         query = str(ui.inputbox.text())
