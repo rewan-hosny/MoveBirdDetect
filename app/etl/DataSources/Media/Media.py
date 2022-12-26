@@ -1,6 +1,7 @@
 
 from app.etl.DataSources.IDataSource import IDataSource
 from app.etl.Move_Bird.bird import BirdMoveDetect,birds
+from app.etl.Move_Bird.motion import ClsMotion,Details
 from app.etl.DataSources.Media.MediaTypes import EMedia
 
 class Media(IDataSource):
@@ -9,7 +10,7 @@ class Media(IDataSource):
 
     def extract(self, file_path):
         if(self.type==EMedia.Folder):
-            data =BirdMoveDetect().changes(file_path)
+            data=BirdMoveDetect().get_changes(file_path)
             return data
         if(self.type==EMedia.VIDEO):
             data=birds.count_birds(file_path)

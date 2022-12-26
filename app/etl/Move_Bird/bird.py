@@ -4,6 +4,9 @@ import os
 from app.etl.Move_Bird.motion import ClsMotion
 import pandas as pd
 from app.etl.tracker import EuclideanDistTracker
+import pandas as pd
+from numpy import nan
+
 class BirdMoveDetect:
     def __init__(self):
         current_directory = pathlib.Path(__file__).parent.resolve()
@@ -11,42 +14,58 @@ class BirdMoveDetect:
         self.birdsCascade = cv2.CascadeClassifier(cascade_path)
         pass
 
-    def changes(self, framesPath):
+    def get_count(self, frame) -> int:
+        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        birds = self.birdsCascade.detectMultiScale(
+            gray,
+            scaleFactor=1.4,
+            minNeighbors=2,
+            #minSize=(10, 10),
+            maxSize=(30, 30),
+            flags=cv2.CASCADE_SCALE_IMAGE
+        )
+        return len(birds)
+
+    def get_changes(self, framesPath):
         motion = ClsMotion()
-        changes = motion.process_frames(framesPath)
-        changes_convert = self.convertion(changes)
-        return changes_convert
+        changes_arr = motion.process_frames(framesPath)
+        return changes_arr
 
-    def convertion(self, bird_motion):
+    def get_changes_for_video(self, video_path):
+        motion = ClsMotion()
+        changes_arr = motion.process_videos(video_path)
+        return changes_arr
+
+    def convert_to_pd(self, bird_dict):
         frames = []
-        for time, body in bird_motion.items():
-            bird_movement = dict()
-            bird_movement['time'] = time
-            bird_movement['head_movement'] = ''
-            bird_movement['leg_movement'] = ''
-            bird_movement['tail_movement'] = ''
-            bird_movement['wing_movement'] = ''
-            if(0 in body):
-                bird_movement['head_movement'] = True
-                bird_movement['head_movement_time_span'] = body[0][0]
-                bird_movement['head_movement_time_start'] = body[0][1]
+        for time, bird in bird_dict.items():
+            output_dict = dict()
+            output_dict['time'] = time
+            output_dict['head_movement'] = nan
+            output_dict['leg_movement'] = nan
+            output_dict['tail_movement'] = nan
+            output_dict['wing_movement'] = nan
+            if(0 in bird):
+                output_dict['head_movement'] = True
+                output_dict['head_movement_time_span'] = bird[0][0]
+                output_dict['head_movement_time_start'] = bird[0][1]
 
-            if(1 in body):
-                bird_movement['leg_movement'] = True
-                bird_movement['leg_movement_time_span'] = body[1][0]
-                bird_movement['leg_movement_time_start'] = body[1][1]
+            if(1 in bird):
+                output_dict['leg_movement'] = True
+                output_dict['leg_movement_time_span'] = bird[1][0]
+                output_dict['leg_movement_time_start'] = bird[1][1]
 
-            if(2 in body):
-                bird_movement['wing_movement'] = True
-                bird_movement['wing_movement_time_span'] = body[2][0]
-                bird_movement['wing_movement_time_start'] = body[2][1]
+            if(2 in bird):
+                output_dict['wing_movement'] = True
+                output_dict['wing_movement_time_span'] = bird[2][0]
+                output_dict['wing_movement_time_start'] = bird[2][1]
 
-            if(3 in body):
-                bird_movement['tail_movement'] = True
-                bird_movement['tail_movement_time_span'] = body[3][0]
-                bird_movement['tail_movement_time_start'] = body[3][1]
+            if(3 in bird):
+                output_dict['tail_movement'] = True
+                output_dict['tail_movement_time_span'] = bird[3][0]
+                output_dict['tail_movement_time_start'] = bird[3][1]
 
-            frames.append(bird_movement)
+            frames.append(output_dict)
         return pd.DataFrame(frames)
 class birds :
     def pega_center(x, y, w, h):

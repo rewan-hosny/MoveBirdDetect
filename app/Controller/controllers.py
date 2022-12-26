@@ -5,8 +5,8 @@ from datetime import datetime
 import time
 from tabulate import tabulate
 import traceback
-import logging
-execution_logger = logging.getLogger('Execution')
+# import logging
+# execution_logger = logging.getLogger('Execution')
 
 
 def compile():
@@ -47,5 +47,6 @@ def execute():
                 ui.results.toPlainText() + f"\n{table}\n"
             )
     except Exception as e:
-
-        execution_logger.error (e, exc_info=True)
+        print({e})
+        #
+        # execution_logger.error (e, exc_info=True)
